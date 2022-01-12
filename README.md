@@ -1,4 +1,8 @@
-# weather-dashboard
+# Weather Dashboard
+
+<img width="1267" alt="Screen Shot 2022-01-11 at 9 03 27 PM" src="https://user-images.githubusercontent.com/96030343/149067910-251d62bc-1d1e-4089-8ac9-0bc86d40a672.png">
+
+
 Shows the 5-day forecast of a selected area. 
 
 API comes from OpenWeather to generate results.
