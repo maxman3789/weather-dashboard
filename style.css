@@ -1,0 +1,77 @@
+header {
+    background-color: aliceblue;
+    background-image: url("https://wallpaperaccess.com/full/3604547.jpg");
+    background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+}
+
+header h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: -webkit-xxx-large;
+    text-decoration: underline;
+}
+
+.form-label {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: x-large;
+}
+
+#weatherContainer {
+    width: 100%;
+
+}
+
+.btn-info {
+    width: 100%;
+}
+
+#currentWeather .card-text {
+    font-size: larger;
+}
+
+.mb-3 {
+    width: 20%;
+    display: inline-flex;
+}
+
+h3.card-body {
+    font-size: xx-large;
+}
+
+
+/* UV Index values */
+.low{
+    border-radius: 5px;
+    background-color: green;
+    padding: 5px;
+    color: white;
+}
+
+.moderate{
+    border-radius: 5px;
+    background-color: yellow;
+    padding: 5px;
+    color: black;
+}
+
+.high{
+    border-radius: 5px;
+    background-color: orange;
+    padding: 5px;
+    color: black;
+}
+
+.veryHigh{
+    border-radius: 5px;
+    background-color: red;
+    padding: 5px;
+    color: white;
+}
+
+.extreme{
+    border-radius: 5px;
+    background-color: rgb(0, 0, 0);
+    padding: 5px;
+    color: white;
+}
