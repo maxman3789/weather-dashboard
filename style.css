@@ -19,8 +19,11 @@ header h1 {
 
 #weatherContainer {
     width: 100%;
-
 }
+
+.list-group-item-primary {
+    cursor: pointer;
+    }
 
 .btn-info {
     width: 100%;
@@ -33,6 +36,7 @@ header h1 {
 .mb-3 {
     width: 20%;
     display: inline-flex;
+    background-color: aliceblue;
 }
 
 h3.card-body {
