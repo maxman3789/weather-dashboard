@@ -1,4 +1,3 @@
-// quick refresher on Fetching https://bithacker.dev/fetch-weather-openweathermap-api-javascript
 
 // reference video https://www.youtube.com/watch?v=nGVoHEZojiQ
 // https://webdesign.tutsplus.com/tutorials/build-a-simple-weather-app-with-vanilla-javascript--cms-33893
@@ -66,6 +65,7 @@ $("#citySearchButton").on("click", function(event){
     }
     // saves city array to local storage
     localStorage.setItem("cities", JSON.stringify(cityListArray));
+
     // saves the currently display city to local storage
     localStorage.setItem("currentCity", JSON.stringify(cityName));
 
@@ -92,15 +92,15 @@ clear.addEventListener("click", clearStorage)
 // https://www.youtube.com/watch?v=_8gHHBlbziw
 async function displayWeather() {
 
-    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial&appid=" + apikey;
+    var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial&appid=" + apikey;
 
     var response = await $.ajax({
-        url: queryURL,
+        url: weatherURL,
         method: "GET"
       })
         console.log(response);
 
-        var currentWeatherDiv = $("<div class='card-body' id='currentWeather'>");
+        var currentWeatherCont = $("<div class='card-body' id='currentWeather'>");
         var getCurrentCity = response.name;
         
         var date = new Date();
@@ -110,21 +110,21 @@ async function displayWeather() {
         var getCurrentWeatherIcon = response.weather[0].icon;
         var displayCurrentWeatherIcon = $("<p class='card-text'><img src = http://openweathermap.org/img/wn/" + getCurrentWeatherIcon + "@2x.png /></p>");
         
-        var currentCityEl = $("<h3 class = 'card-body'>").text(getCurrentCity+ " (" +val+ ")");
-        currentCityEl.append(displayCurrentWeatherIcon);
-        currentWeatherDiv.append(currentCityEl);
+        var currentCity = $("<h3 class = 'card-body'>").text(getCurrentCity+ " (" + val+ ")");
+        currentCity.append(displayCurrentWeatherIcon);
+        currentWeatherCont.append(currentCity);
         
-        var getTemp = response.main.temp.toFixed(1);
-        var tempEl = $("<p class='card-text'>").text("Temperature: " + getTemp + "° F");
-        currentWeatherDiv.append(tempEl);
+        var getTemp = response.main.temp;
+        var temp = $("<p class='card-text'>").text("Temperature: " + getTemp + "° F");
+        currentWeatherCont.append(temp);
         
         var getHumidity = response.main.humidity;
-        var humidityEl = $("<p class='card-text'>").text("Humidity: "+ getHumidity + "%");
-        currentWeatherDiv.append(humidityEl);
+        var humidity = $("<p class='card-text'>").text("Humidity: "+ getHumidity + "%");
+        currentWeatherCont.append(humidity);
         
-        var getWindSpeed = response.wind.speed.toFixed(1);
-        var windSpeedEl = $("<p class='card-text'>").text("Wind Speed: " + getWindSpeed + " mph");
-        currentWeatherDiv.append(windSpeedEl);
+        var getWindSpeed = response.wind.speed;
+        var windSpeed = $("<p class='card-text'>").text("Wind Speed: " + getWindSpeed + " mph");
+        currentWeatherCont.append(windSpeed);
         
         var longitude = response.coord.lon;
         var latitude = response.coord.lat;
@@ -151,20 +151,20 @@ async function displayWeather() {
             uvNumber.addClass("extreme");
         } 
         uvNumber.text(uvIndex);
-        var uvIndexEl = $("<p class='card-text'>").text("UV Index: ");
-        uvNumber.appendTo(uvIndexEl);
+        var uvIndexP = $("<p class='card-text'>").text("UV Index: ");
+        uvNumber.appendTo(uvIndexP);
 
-        currentWeatherDiv.append(uvIndexEl);
-        $("#currentWeather").html(currentWeatherDiv);
+        currentWeatherCont.append(uvIndexP);
+        $("#currentWeather").html(currentWeatherCont);
 }
 
 // https://openweathermap.org/forecast5
 async function displayFiveDayForecast() {
 
-    var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=imperial&appid=" + apikey;
+    var weatherURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=imperial&appid=" + apikey;
 
     var response = await $.ajax({
-        url: queryURL,
+        url: weatherURL,
         method: "GET"
       })
       var forecastDiv = $("<div  id='fiveDayForecast'>");
@@ -175,7 +175,7 @@ async function displayFiveDayForecast() {
       forecastDiv.append(cardDeck);
       
       console.log(response);
-      for (i=0; i < 5; i++){
+      for (i = 0; i < 5; i++){
           var forecastCard = $("<div class='card mb-3 mt-3'>");
           var cardBody = $("<div class='card-body'>");
           var date = new Date();
@@ -191,16 +191,16 @@ async function displayFiveDayForecast() {
         cardBody.append(displayWeatherIcon);
         
         var getTemp = response.list[i].main.temp;
-        var tempEl = $("<p class='card-text'>").text("Temp: " + getTemp + "° F");
-        cardBody.append(tempEl);
+        var temp = $("<p class='card-text'>").text("Temp: " + getTemp + "° F");
+        cardBody.append(temp);
         
         var getHumidity = response.list[i].main.humidity;
-        var humidityEl = $("<p class='card-text'>").text("Humidity: " + getHumidity + " %");
-        cardBody.append(humidityEl);
+        var humidity = $("<p class='card-text'>").text("Humidity: " + getHumidity + " %");
+        cardBody.append(humidity);
 
         var getWindSpeed = response.list[i].wind.speed;
-        var windSpeedEl = $("<p class='card-text'>").text("Wind Speed: " + getWindSpeed + " mph");
-        cardBody.append(windSpeedEl);
+        var windSpeed = $("<p class='card-text'>").text("Wind Speed: " + getWindSpeed + " mph");
+        cardBody.append(windSpeed);
         
         forecastCard.append(cardBody);
         cardDeck.append(forecastCard);
